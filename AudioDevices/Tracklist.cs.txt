@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace AudioDevices
+{
+    public class TrackList
+    {
+
+        #region Fields
+        private List<Track> tracks; 
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrackList"/> class.
+        /// </summary>
+        public TrackList()
+        {
+            this.tracks = new List<Track>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrackList"/> class.
+        /// </summary>
+        /// <param name="tracks">The tracks.</param>
+        public TrackList(List<Track> tracks)
+        {
+            this.tracks = tracks;
+        } 
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Adds the specified new track.
+        /// </summary>
+        /// <param name="newTrack">The new track.</param>
+        public void Add(Track newTrack)
+        {
+            tracks.Add(newTrack);
+        }
+
+        /// <summary>
+        /// Removes the specified old track.
+        /// </summary>
+        /// <param name="oldTrack">The old track.</param>
+        public void Remove(Track oldTrack)
+        {
+            tracks.Remove(oldTrack);
+        }
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
+        public void Clear()
+        {
+            tracks.Clear();
+        }
+
+        /// <summary>
+        /// Gets all tracks.
+        /// </summary>
+        /// <returns></returns>
+        public List<Track> GetAllTracks()
+        {
+            return tracks;
+        }
+
+        /// <summary>
+        /// Shuffles this instance.
+        /// </summary>
+        /// <returns></returns>
+        public List<Track> Shuffle()
+        {
+            List<Track> temp = new List<Track>();
+            foreach (var track in tracks)
+            {
+                temp.Add(track);
+            }
+            List<Track> shuffled = new List<Track>();
+            Random r = new Random();
+            while (temp.Count > 0)
+            {
+                int randomNumber = r.Next(temp.Count);
+                shuffled.Add(temp[randomNumber]);
+                temp.RemoveAt(randomNumber);
+            }
+            return shuffled;
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <value>
+        /// The count.
+        /// </value>
+        public int Count
+        {
+            get { return tracks.Count; }
+        }
+
+        /// <summary>
+        /// Gets the total time.
+        /// </summary>
+        /// <value>
+        /// The total time.
+        /// </value>
+        public Time TotalTime
+        {
+            get
+            {
+                int seconds = 0;
+                foreach (var item in tracks)
+                {
+                    seconds += item.GetLengthInSeconds();
+                }
+                return new Time(seconds);
+            }
+        } 
+        #endregion
+    }
+
+
+}

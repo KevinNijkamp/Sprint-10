@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AudioDevices
+{
+    /// <summary>
+    /// Possible values for cardridge types
+    /// </summary>
+    public enum MemoCartridgeType
+    {
+        C60,
+        C90,
+        C120,
+        Unknown
+    }
+
+}

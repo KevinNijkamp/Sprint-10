@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace AudioDevices
+{
+    public struct Time
+    {
+        #region Fields
+        private int hours;
+        private int minutes;
+        private int seconds;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets the length in seconds.
+        /// </summary>
+        /// <value>
+        /// The seconds.
+        /// </value>
+        public int Seconds
+        {
+            get
+            {
+                return this.hours * 3600 + this.minutes * 60 + this.seconds;
+            }
+        } 
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> struct.
+        /// </summary>
+        /// <param name="seconds">The time in seconds.</param>
+        public Time(int seconds)
+        {
+            // Bereken het aantal uren
+            this.hours = seconds / 3600;
+            // Bereken aantal seconden dat overblijft
+            int remainder = seconds % 3600;
+            // Berken aantal minuten
+            this.minutes = remainder / 60;
+            // Bereken aantal seconden
+            this.seconds = remainder % 60;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> struct.
+        /// </summary>
+        /// <param name="minutes">The minutes.</param>
+        /// <param name="seconds">The seconds.</param>
+        public Time(int minutes, int seconds) : this(minutes * 60 + seconds)
+        {
+
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Time"/> struct.
+        /// </summary>
+        /// <param name="hours">The hours.</param>
+        /// <param name="minutes">The minutes.</param>
+        /// <param name="seconds">The seconds.</param>
+        public Time(int hours, int minutes, int seconds) :
+            this(hours * 3600 + minutes * 60 + seconds)
+        {
+
+        }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            string timeString = "";
+            timeString += hours < 10 ? "0" + hours : hours.ToString();
+            timeString += ":";
+            timeString += minutes < 10 ? "0" + minutes : minutes.ToString();
+            timeString += ":";
+            timeString += seconds < 10 ? "0" + seconds : seconds.ToString();
+            return timeString;
+        }
+
+        /// <summary>
+        /// Gets the length in seconds.
+        /// </summary>
+        /// <returns></returns>
+        public int GetSeconds()
+        {
+            return this.hours * 3600 + this.minutes * 60 + this.seconds;
+
+        }
+        #endregion
+    }
+}
